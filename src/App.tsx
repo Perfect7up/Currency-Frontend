@@ -1,9 +1,10 @@
-import './styles/App.css';
+import AppRouter from './core/routes/routes';
+import './styles/style.css';
 
 function App() {
   return (
     <>
-      <div>Hello World</div>
+      <AppRouter />
     </>
   );
 }
