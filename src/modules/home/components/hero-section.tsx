@@ -36,7 +36,8 @@ const Hero = () => {
             letterSpacing: '-0.02em',
           }}
         >
-          The World’s Premier <br /> Crypto Trading Platform
+          The World’s Premier <br />
+          <span className="text-blue-600 dark:text-blue-500">Crypto Trading Platform</span>
         </Title>
 
         <Title

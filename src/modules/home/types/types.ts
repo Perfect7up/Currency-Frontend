@@ -12,5 +12,17 @@ export interface MarketOverview {
   btcDominance: number;
   btcPrice: number;
   ethPrice: number;
-  timestamp?: string | number | Date;
+  timestamp?: string;
+}
+
+export interface Coin {
+  id: string;
+  symbol: string;
+  name: string;
+  image: string;
+  currentPrice: number;
+  priceChangePercentage24h: number;
+  marketCapRank: number;
+  marketCap: number;
+  lastUpdated: string;
 }

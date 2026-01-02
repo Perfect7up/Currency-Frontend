@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { marketApi } from '../api/market.api';
+import type { MarketOverview, Coin } from '../types/types';
 
 export const useMarketOverview = () =>
   useQuery({
@@ -7,8 +8,9 @@ export const useMarketOverview = () =>
     queryFn: async () => {
       const { data, error } = await marketApi.overview();
       if (error) throw error;
-      return data;
+      return data as unknown as MarketOverview;
     },
+    staleTime: 60000,
   });
 
 export const useTopGainers = (limit = 10) =>
@@ -17,6 +19,29 @@ export const useTopGainers = (limit = 10) =>
     queryFn: async () => {
       const { data, error } = await marketApi.topGainers(limit);
       if (error) throw error;
-      return data;
+      return data as unknown as Coin[];
     },
+    staleTime: 60000,
+  });
+
+export const useTopLosers = (limit = 10) =>
+  useQuery({
+    queryKey: ['top-losers', limit],
+    queryFn: async () => {
+      const { data, error } = await marketApi.topLosers(limit);
+      if (error) throw error;
+      return data as unknown as Coin[];
+    },
+    staleTime: 60000,
+  });
+
+export const useTrending = (limit = 10) =>
+  useQuery({
+    queryKey: ['trending', limit],
+    queryFn: async () => {
+      const { data, error } = await marketApi.trending(limit);
+      if (error) throw error;
+      return data as unknown as Coin[];
+    },
+    staleTime: 60000,
   });
