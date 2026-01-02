@@ -1,0 +1,89 @@
+{
+  "openapi": "3.0.4",
+  "info": {
+    "title": "Market API",
+    "description": "Market-specific endpoints",
+    "version": "v1"
+  },
+  "paths": {
+    "/api/Market/overview": {
+      "get": {
+        "tags": ["Market"],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Market/top-gainers": {
+      "get": {
+        "tags": ["Market"],
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 5
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Market/top-losers": {
+      "get": {
+        "tags": ["Market"],
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 5
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Market/trending": {
+      "get": {
+        "tags": ["Market"],
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {},
+  "tags": [
+    {
+      "name": "Market"
+    }
+  ]
+}
