@@ -1,5 +1,5 @@
-import Navbar from '../../core/components/layout/navbar';
-import { Hero, MarketStatsCard, TrendingCoins } from './components';
+import { Footer, Navbar } from '../../core/components/layout';
+import { BottomCTA, Hero, MarketStatsCard, TrendingCoins } from './components';
 
 const Home = () => {
   return (
@@ -8,6 +8,8 @@ const Home = () => {
       <Hero />
       <MarketStatsCard />
       <TrendingCoins />
+      <BottomCTA />
+      <Footer />
     </>
   );
 };

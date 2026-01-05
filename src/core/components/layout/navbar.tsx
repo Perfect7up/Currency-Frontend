@@ -54,7 +54,7 @@ const Navbar = () => {
         },
       }}
     >
-      <nav className="sticky top-0 z-50 w-full border-b border-zinc-200 bg-white/90 backdrop-blur-md transition-all duration-300 dark:border-zinc-800 dark:bg-black/90">
+      <nav className="sticky top-0 z-50 w-full border-b border-zinc-200 bg-white/90 backdrop-blur-md transition-all duration-300 dark:border-[#0b1220] dark:bg-[#000513]/90">
         <div className="w-full px-6 lg:px-10">
           <Flex align="center" justify="space-between" className="h-24">
             <RouterLink to="/" className="group flex shrink-0 items-center gap-3">
