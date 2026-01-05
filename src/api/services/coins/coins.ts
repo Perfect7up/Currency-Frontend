@@ -28,7 +28,11 @@ export interface paths {
           headers: {
             [name: string]: unknown;
           };
-          content?: never;
+          content: {
+            'text/plain': components['schemas']['Coin'][];
+            'application/json': components['schemas']['Coin'][];
+            'text/json': components['schemas']['Coin'][];
+          };
         };
       };
     };
@@ -63,42 +67,11 @@ export interface paths {
           headers: {
             [name: string]: unknown;
           };
-          content?: never;
-        };
-      };
-    };
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/Coins/search': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: {
-      parameters: {
-        query?: {
-          query?: string;
-        };
-        header?: never;
-        path?: never;
-        cookie?: never;
-      };
-      requestBody?: never;
-      responses: {
-        /** @description OK */
-        200: {
-          headers: {
-            [name: string]: unknown;
+          content: {
+            'text/plain': components['schemas']['Coin'];
+            'application/json': components['schemas']['Coin'];
+            'text/json': components['schemas']['Coin'];
           };
-          content?: never;
         };
       };
     };
@@ -131,42 +104,11 @@ export interface paths {
           headers: {
             [name: string]: unknown;
           };
-          content?: never;
-        };
-      };
-    };
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/Coins/live': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: {
-      parameters: {
-        query?: {
-          perPage?: number;
-        };
-        header?: never;
-        path?: never;
-        cookie?: never;
-      };
-      requestBody?: never;
-      responses: {
-        /** @description OK */
-        200: {
-          headers: {
-            [name: string]: unknown;
+          content: {
+            'text/plain': components['schemas']['Coin'][];
+            'application/json': components['schemas']['Coin'][];
+            'text/json': components['schemas']['Coin'][];
           };
-          content?: never;
         };
       };
     };
@@ -203,7 +145,11 @@ export interface paths {
           headers: {
             [name: string]: unknown;
           };
-          content?: never;
+          content: {
+            'text/plain': components['schemas']['PriceHistory'][];
+            'application/json': components['schemas']['PriceHistory'][];
+            'text/json': components['schemas']['PriceHistory'][];
+          };
         };
       };
     };
@@ -218,7 +164,33 @@ export interface paths {
 }
 export type webhooks = Record<string, never>;
 export interface components {
-  schemas: never;
+  schemas: {
+    Coin: {
+      id?: string | null;
+      symbol?: string | null;
+      name?: string | null;
+      image?: string | null;
+      /** Format: double */
+      currentPrice?: number;
+      /** Format: double */
+      priceChangePercentage24h?: number;
+      /** Format: int64 */
+      marketCap?: number;
+      /** Format: int32 */
+      marketCapRank?: number;
+      /** Format: date-time */
+      lastUpdated?: string;
+    };
+    PriceHistory: {
+      /** Format: int32 */
+      id?: number;
+      coinId?: string | null;
+      /** Format: double */
+      price?: number;
+      /** Format: date-time */
+      timestamp?: string;
+    };
+  };
   responses: never;
   parameters: never;
   requestBodies: never;

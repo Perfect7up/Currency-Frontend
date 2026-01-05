@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { marketApi } from '../api/market.api';
+import { marketApi } from '../api/market/market.api';
 import type { MarketOverview, Coin } from '../types/types';
 
 export const useMarketOverview = () =>
@@ -22,6 +22,7 @@ export const useTopGainers = (limit = 10) =>
       return data as unknown as Coin[];
     },
     staleTime: 60000,
+    retry: false,
   });
 
 export const useTopLosers = (limit = 10) =>
@@ -33,6 +34,7 @@ export const useTopLosers = (limit = 10) =>
       return data as unknown as Coin[];
     },
     staleTime: 60000,
+    retry: false,
   });
 
 export const useTrending = (limit = 10) =>
@@ -44,4 +46,5 @@ export const useTrending = (limit = 10) =>
       return data as unknown as Coin[];
     },
     staleTime: 60000,
+    retry: false,
   });

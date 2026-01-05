@@ -1,6 +1,5 @@
 import Navbar from '../../core/components/layout/navbar';
-import Hero from './components/hero-section';
-import MarketStatsCard from './components/market/market-stats.card';
+import { Hero, MarketStatsCard, TrendingCoins } from './components';
 
 const Home = () => {
   return (
@@ -8,6 +7,7 @@ const Home = () => {
       <Navbar />
       <Hero />
       <MarketStatsCard />
+      <TrendingCoins />
     </>
   );
 };

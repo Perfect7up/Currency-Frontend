@@ -1,24 +1,24 @@
-import { api } from './client';
+import { marketApiClient } from './market.client';
 
 export const marketApi = {
-  overview: () => api.GET('/api/Market/overview'),
+  overview: () => marketApiClient.GET('/api/Market/overview'),
 
   topGainers: (limit?: number) =>
-    api.GET('/api/Market/top-gainers', {
+    marketApiClient.GET('/api/Market/top-gainers', {
       params: {
         query: { limit },
       },
     }),
 
   topLosers: (limit?: number) =>
-    api.GET('/api/Market/top-losers', {
+    marketApiClient.GET('/api/Market/top-losers', {
       params: {
         query: { limit },
       },
     }),
 
   trending: (limit?: number) =>
-    api.GET('/api/Market/trending', {
+    marketApiClient.GET('/api/Market/trending', {
       params: {
         query: { limit },
       },

@@ -1,10 +1,5 @@
 import { Skeleton, Divider, Typography, Button, Result } from 'antd';
-import {
-  useMarketOverview,
-  useTopGainers,
-  useTopLosers,
-  useTrending,
-} from '../../hooks/use-market';
+import { useMarketOverview, useTopGainers, useTopLosers, useTrending } from '../hooks/use-market';
 import {
   ClockCircleOutlined,
   FireFilled,
@@ -13,9 +8,8 @@ import {
   RocketOutlined,
   ReloadOutlined,
 } from '@ant-design/icons';
-import { StatItem } from './stat-item';
-import { CoinList } from './coin-list';
-import type { MarketOverview } from '../../types/types';
+import type { MarketOverview } from '../types/types';
+import { CoinList, StatItem } from './common';
 
 const { Title } = Typography;
 

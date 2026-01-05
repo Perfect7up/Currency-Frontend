@@ -26,3 +26,10 @@ export interface Coin {
   marketCap: number;
   lastUpdated: string;
 }
+
+export interface PriceHistory {
+  id: number;
+  coinId: string;
+  price: number;
+  timestamp: string; // DateTime becomes ISO string
+}
