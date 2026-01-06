@@ -14,8 +14,8 @@ export interface paths {
     get: {
       parameters: {
         query?: {
-          page?: number;
-          perPage?: number;
+          page?: number | string;
+          perPage?: number | string;
         };
         header?: never;
         path?: never;
@@ -130,7 +130,7 @@ export interface paths {
     get: {
       parameters: {
         query?: {
-          days?: number;
+          days?: number | string;
         };
         header?: never;
         path: {
@@ -161,32 +161,222 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  '/api/Coins/{id}/details': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path: {
+          id: string;
+        };
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'text/plain': components['schemas']['Coin'];
+            'application/json': components['schemas']['Coin'];
+            'text/json': components['schemas']['Coin'];
+          };
+        };
+      };
+    };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/Coins/{id}/price-history': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: {
+      parameters: {
+        query?: {
+          period?: string;
+        };
+        header?: never;
+        path: {
+          id: string;
+        };
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'text/plain': components['schemas']['PriceHistory'][];
+            'application/json': components['schemas']['PriceHistory'][];
+            'text/json': components['schemas']['PriceHistory'][];
+          };
+        };
+      };
+    };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/Coins/{id}/market-stats': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path: {
+          id: string;
+        };
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'text/plain': components['schemas']['MarketStats'];
+            'application/json': components['schemas']['MarketStats'];
+            'text/json': components['schemas']['MarketStats'];
+          };
+        };
+      };
+    };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
 }
 export type webhooks = Record<string, never>;
 export interface components {
   schemas: {
     Coin: {
-      id?: string | null;
-      symbol?: string | null;
-      name?: string | null;
-      image?: string | null;
+      id?: string;
+      symbol?: string;
+      name?: string;
+      image?: string;
       /** Format: double */
-      currentPrice?: number;
+      currentPrice?: number | string;
       /** Format: double */
-      priceChangePercentage24h?: number;
+      priceChangePercentage24h?: number | string;
       /** Format: int64 */
-      marketCap?: number;
+      marketCap?: number | string;
       /** Format: int32 */
-      marketCapRank?: number;
+      marketCapRank?: number | string;
+      description?: null | string;
       /** Format: date-time */
       lastUpdated?: string;
     };
+    MarketOverview: {
+      /** Format: int32 */
+      id?: number | string;
+      /** Format: double */
+      totalMarketCap?: number | string;
+      /** Format: double */
+      marketCapChange?: number | string;
+      /** Format: double */
+      totalVolume?: number | string;
+      /** Format: double */
+      volumeChange?: number | string;
+      /** Format: double */
+      btcDominance?: number | string;
+      /** Format: double */
+      btcPrice?: number | string;
+      /** Format: double */
+      ethPrice?: number | string;
+      /** Format: date-time */
+      timestamp?: null | string;
+    };
+    MarketStats: {
+      coinId?: string;
+      /** Format: double */
+      currentPrice?: number | string;
+      /** Format: int64 */
+      marketCap?: number | string;
+      /** Format: int32 */
+      marketCapRank?: number | string;
+      /** Format: double */
+      totalVolume?: number | string;
+      /** Format: double */
+      high24h?: number | string;
+      /** Format: double */
+      low24h?: number | string;
+      /** Format: double */
+      circulatingSupply?: number | string;
+      /** Format: double */
+      totalSupply?: number | string;
+      /** Format: double */
+      maxSupply?: null | number | string;
+      /** Format: double */
+      priceChangePercentage24h?: number | string;
+    };
+    NewsArticle: {
+      /** Format: int32 */
+      id?: number | string;
+      title?: string;
+      content?: string;
+      summary?: string;
+      imageUrl?: string;
+      source?: string;
+      url?: string;
+      isFeatured?: boolean;
+      /** Format: date-time */
+      publishedAt?: string;
+    };
+    OhlcvPoint: {
+      /** Format: int64 */
+      time?: number | string;
+      /** Format: double */
+      open?: number | string;
+      /** Format: double */
+      high?: number | string;
+      /** Format: double */
+      low?: number | string;
+      /** Format: double */
+      close?: number | string;
+      /** Format: double */
+      volume?: number | string;
+    };
     PriceHistory: {
       /** Format: int32 */
-      id?: number;
-      coinId?: string | null;
+      id?: number | string;
+      coinId?: string;
       /** Format: double */
-      price?: number;
+      price?: number | string;
       /** Format: date-time */
       timestamp?: string;
     };

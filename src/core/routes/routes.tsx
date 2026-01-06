@@ -1,6 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Suspense } from 'react';
 import Home from '../../modules/home/home';
+import MainLayout from '../components/layout/main-layout';
+import Coins from '../../modules/coins/coins';
 
 const LoadingFallback = () => (
   <div className="flex h-screen items-center justify-center">
@@ -13,7 +15,10 @@ const AppRouter = () => {
     <Router>
       <Suspense fallback={<LoadingFallback />}>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route element={<MainLayout />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/coins" element={<Coins />} />
+          </Route>
         </Routes>
       </Suspense>
     </Router>
