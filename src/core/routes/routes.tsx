@@ -3,6 +3,7 @@ import { Suspense } from 'react';
 import Home from '../../modules/home/home';
 import MainLayout from '../components/layout/main-layout';
 import Coins from '../../modules/coins/coins';
+import News from '../../modules/news/news';
 
 const LoadingFallback = () => (
   <div className="flex h-screen items-center justify-center">
@@ -18,6 +19,7 @@ const AppRouter = () => {
           <Route element={<MainLayout />}>
             <Route path="/" element={<Home />} />
             <Route path="/coins" element={<Coins />} />
+            <Route path="/blogs" element={<News />} />
           </Route>
         </Routes>
       </Suspense>
