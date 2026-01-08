@@ -4,6 +4,7 @@ import Home from '../../modules/home/home';
 import MainLayout from '../components/layout/main-layout';
 import Coins from '../../modules/coins/coins';
 import News from '../../modules/news/news';
+import Tools from '../../modules/tools/tools';
 
 const LoadingFallback = () => (
   <div className="flex h-screen items-center justify-center">
@@ -20,6 +21,7 @@ const AppRouter = () => {
             <Route path="/" element={<Home />} />
             <Route path="/coins" element={<Coins />} />
             <Route path="/blogs" element={<News />} />
+            <Route path="/tools" element={<Tools />} />
           </Route>
         </Routes>
       </Suspense>

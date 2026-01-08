@@ -7,13 +7,14 @@ const { Title, Text } = Typography;
 export const FeaturedNews = ({ onReadMore }: { onReadMore: (id: number) => void }) => {
   const { data: featured, isLoading, isError } = useFeaturedNews();
 
+  const WORD_LIMIT = 60;
+
   const formatSummary = (text: string, limit: number) => {
     if (!text) return '';
-    const words = text.split(/\s+/);
+    const words = text.trim().split(/\s+/);
     if (words.length <= limit) return text;
 
-    const truncated = words.slice(0, limit).join(' ');
-    return truncated;
+    return words.slice(0, limit).join(' ') + '...';
   };
 
   if (isLoading)
@@ -28,8 +29,12 @@ export const FeaturedNews = ({ onReadMore }: { onReadMore: (id: number) => void 
   if (isError || !featured?.[0]) return null;
 
   const main = featured[0];
-  const isLongText = (main.summary || main.content || '').split(/\s+/).length > 200;
-  const processedText = formatSummary(main.summary || main.content || '', 200);
+  const rawText = main.summary || main.content || '';
+  const wordCount = rawText.trim().split(/\s+/).length;
+
+  // Apply limit to the text
+  const processedText = formatSummary(rawText, WORD_LIMIT);
+  const isLongText = wordCount > WORD_LIMIT;
 
   return (
     <section className="relative overflow-hidden bg-white px-4 py-12 transition-colors duration-300 dark:bg-[#000513]">
@@ -62,7 +67,7 @@ export const FeaturedNews = ({ onReadMore }: { onReadMore: (id: number) => void 
                 }
               />
               <span className="text-slate-700">|</span>
-              <Text className="text-xs font-bold tracking-[0.2em] text-slate-400 uppercase">
+              <Text className="text-xs font-bold tracking-[0.2em] text-slate-400! uppercase">
                 {main.source}
               </Text>
             </div>
@@ -80,12 +85,15 @@ export const FeaturedNews = ({ onReadMore }: { onReadMore: (id: number) => void 
             </Title>
 
             <div className="mb-10">
-              <Text className="line-clamp-5 inline text-lg! leading-relaxed! text-slate-300! md:line-clamp-6 md:text-xl!">
+              <Text className="inline text-lg! leading-relaxed! text-slate-300! md:text-xl!">
                 {processedText}
                 {isLongText && (
-                  <span className="ml-2 inline-flex items-center gap-1 font-bold text-blue-500 dark:text-indigo-400">
+                  <button
+                    onClick={() => onReadMore(main.id)}
+                    className="ml-2 inline-flex items-center gap-1 font-bold text-blue-500 hover:underline dark:text-indigo-400"
+                  >
                     — Continue Reading <ReadOutlined className="text-sm" />
-                  </span>
+                  </button>
                 )}
               </Text>
             </div>

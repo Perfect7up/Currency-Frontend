@@ -13,7 +13,8 @@
     "prepare": "husky",
     "generate-api:coins": "npx openapi-typescript src/api/openapi-specs/coins.json -o src/api/services/coins/coins.ts",
     "generate-api:market": "npx openapi-typescript src/api/openapi-specs/market.json -o src/api/services/market/market.ts",
-    "generate-api:news": "npx openapi-typescript src/api/openapi-specs/news.json -o src/api/services/news/news.ts"
+    "generate-api:news": "npx openapi-typescript src/api/openapi-specs/news.json -o src/api/services/news/news.ts",
+    "generate-api:tools": "npx openapi-typescript src/api/openapi-specs/tools.json -o src/api/services/tools/tools.ts"
   },
   "lint-staged": {
     "src/**/*.{ts,tsx,js,jsx,css}": [

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Typography, Button, Pagination, ConfigProvider, theme, Skeleton, Empty, Tag } from 'antd';
 import {
   ArrowRightOutlined,
@@ -17,7 +17,17 @@ interface NewsListingProps {
 
 const NewsListing = ({ onArticleClick }: NewsListingProps) => {
   const [currentPage, setCurrentPage] = useState(1);
+  const [isDarkMode, setIsDarkMode] = useState(false);
   const pageSize = 6;
+
+  // Sync theme with document class (matches TrendingCoins logic)
+  useEffect(() => {
+    const checkTheme = () => setIsDarkMode(document.documentElement.classList.contains('dark'));
+    checkTheme();
+    const observer = new MutationObserver(checkTheme);
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+    return () => observer.disconnect();
+  }, []);
 
   const { data: articles, isLoading, isError, error } = useNews(currentPage, pageSize);
 
@@ -33,6 +43,7 @@ const NewsListing = ({ onArticleClick }: NewsListingProps) => {
   return (
     <section className="bg-white px-4 py-24 transition-colors duration-300 dark:bg-[#000513]">
       <div className="mx-auto max-w-7xl">
+        {/* Header Section */}
         <div className="mb-16 flex flex-col items-start justify-between gap-8 md:flex-row md:items-end">
           <div className="max-w-2xl">
             <div className="mb-4 flex items-center gap-2">
@@ -63,6 +74,7 @@ const NewsListing = ({ onArticleClick }: NewsListingProps) => {
           </Text>
         </div>
 
+        {/* Loading State */}
         {isLoading && (
           <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
             {[...Array(pageSize)].map((_, i) => (
@@ -71,6 +83,7 @@ const NewsListing = ({ onArticleClick }: NewsListingProps) => {
           </div>
         )}
 
+        {/* Error State */}
         {isError && (
           <div className="flex flex-col items-center justify-center rounded-[3rem] border border-dashed border-slate-200 py-20 dark:border-slate-800">
             <Empty
@@ -95,6 +108,7 @@ const NewsListing = ({ onArticleClick }: NewsListingProps) => {
           </div>
         )}
 
+        {/* Content State */}
         {!isLoading && !isError && articles && (
           <>
             <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
@@ -181,14 +195,16 @@ const NewsListing = ({ onArticleClick }: NewsListingProps) => {
               ))}
             </div>
 
-            <div className="mt-20 flex justify-center">
+            {/* Pagination Section - Updated for White Mode */}
+            <div className="mt-20 flex justify-center py-12">
               <ConfigProvider
                 theme={{
-                  algorithm: theme.darkAlgorithm,
+                  algorithm: isDarkMode ? theme.darkAlgorithm : theme.defaultAlgorithm,
                   token: {
-                    colorPrimary: '#6366f1',
-                    borderRadius: 100,
+                    colorPrimary: '#3b82f6',
                     colorBgContainer: 'transparent',
+                    colorText: isDarkMode ? '#94a3b8' : '#475569',
+                    borderRadius: 100,
                   },
                 }}
               >
@@ -201,7 +217,11 @@ const NewsListing = ({ onArticleClick }: NewsListingProps) => {
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                   }}
                   showSizeChanger={false}
-                  className="rounded-full bg-slate-50 px-8 py-3 dark:bg-slate-900/40"
+                  className={`rounded-full px-8 py-3 transition-all duration-300 ${
+                    isDarkMode
+                      ? 'bg-slate-900/40 dark:text-white!'
+                      : 'border border-slate-100 bg-slate-50 shadow-sm'
+                  }`}
                 />
               </ConfigProvider>
             </div>

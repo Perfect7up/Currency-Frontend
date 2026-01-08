@@ -21,4 +21,5 @@ export const menuItems: MenuItem[] = [
 export const resourceMenuItems: ResourceItem[] = [
   { key: 'faq', label: 'FAQ', path: '/faq' },
   { key: 'blogs', label: 'BLOGS', path: '/blogs' },
+  { key: 'tools', label: 'Tools', path: '/tools' },
 ];
