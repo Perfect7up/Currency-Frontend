@@ -14,7 +14,8 @@
     "generate-api:coins": "npx openapi-typescript src/api/openapi-specs/coins.json -o src/api/services/coins/coins.ts",
     "generate-api:market": "npx openapi-typescript src/api/openapi-specs/market.json -o src/api/services/market/market.ts",
     "generate-api:news": "npx openapi-typescript src/api/openapi-specs/news.json -o src/api/services/news/news.ts",
-    "generate-api:tools": "npx openapi-typescript src/api/openapi-specs/tools.json -o src/api/services/tools/tools.ts"
+    "generate-api:tools": "npx openapi-typescript src/api/openapi-specs/tools.json -o src/api/services/tools/tools.ts",
+    "generate-api:trade": "npx openapi-typescript src/api/openapi-specs/trade.json -o src/api/services/trade/trade.ts"
   },
   "lint-staged": {
     "src/**/*.{ts,tsx,js,jsx,css}": [
@@ -29,7 +30,8 @@
     "@hookform/resolvers": "^5.2.2",
     "@tailwindcss/vite": "^4.1.18",
     "@tanstack/react-query": "^5.90.16",
-    "antd": "^6.1.3",
+    "antd": "^6.1.4",
+    "lightweight-charts": "^5.1.0",
     "openapi-fetch": "^0.15.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",

@@ -5,6 +5,9 @@ import MainLayout from '../components/layout/main-layout';
 import Coins from '../../modules/coins/coins';
 import News from '../../modules/news/news';
 import Tools from '../../modules/tools/tools';
+import Trade from '../../modules/trade/trade';
+import About from '../../modules/about/about';
+import FAQ from '../../modules/faq/faq';
 
 const LoadingFallback = () => (
   <div className="flex h-screen items-center justify-center">
@@ -22,6 +25,9 @@ const AppRouter = () => {
             <Route path="/coins" element={<Coins />} />
             <Route path="/blogs" element={<News />} />
             <Route path="/tools" element={<Tools />} />
+            <Route path="/trade" element={<Trade />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/faq" element={<FAQ />} />
           </Route>
         </Routes>
       </Suspense>
