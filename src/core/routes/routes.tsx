@@ -6,13 +6,13 @@ import DashboardLayout from '../../modules/dashboard/dashboard-layout';
 
 import { ProtectedRoute } from '../auth/protected-route';
 
-import Home from '../../modules/home/home';
-import Coins from '../../modules/coins/coins';
-import News from '../../modules/news/news';
-import Tools from '../../modules/tools/tools';
-import Trade from '../../modules/trade/trade';
-import About from '../../modules/about/about';
-import FAQ from '../../modules/faq/faq';
+import Home from '../../modules/landing/home';
+import Coins from '../../modules/landing/routes/coins/coins';
+import News from '../../modules/landing/routes/news/news';
+import Tools from '../../modules/landing/routes/tools/tools';
+import Trade from '../../modules/landing/routes/trade/trade';
+import About from '../../modules/landing/routes/about/about';
+import FAQ from '../../modules/landing/routes/faq/faq';
 
 import { LoginPage } from '../../modules/account/routes/login/login';
 import { SignupPage } from '../../modules/account/routes/signup/signup';

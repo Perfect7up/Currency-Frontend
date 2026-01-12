@@ -1,5 +1,5 @@
 import createClient from 'openapi-fetch';
-import type { paths } from '../../../api/services/news/news';
+import type { paths } from '../../../../../api/services/news/news';
 
 export const newsApiClient = createClient<paths>({
   baseUrl: import.meta.env.VITE_API_BASE_URL_NEWS,
