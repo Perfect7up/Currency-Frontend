@@ -21,6 +21,7 @@ import { ForgotPasswordPage } from '../../modules/account/routes/forgot-password
 import { ConfirmEmailPage } from '../../modules/account/routes/email/confirm-email';
 import { ResetPasswordPage } from '../../modules/account/routes/reset-password/reset-password';
 import { ChangePasswordPage } from '../../modules/account/routes/change-password/change-password';
+import NotFound from '../../modules/errors/not-found';
 
 const LoadingFallback = () => (
   <div className="flex h-screen items-center justify-center bg-white dark:bg-[#000513]">
@@ -51,8 +52,10 @@ const AppRouter = () => {
           <Route element={<ProtectedRoute />}>
             <Route element={<DashboardLayout />}>
               <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/dashboard/*" element={<NotFound />} />
             </Route>
           </Route>
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
     </Router>
