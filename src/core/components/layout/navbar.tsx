@@ -103,7 +103,7 @@ const Navbar = () => {
                 />
               </Dropdown>
               <div className="hidden md:block">
-                <Link to="/login">
+                <Link to="/account/login">
                   <Button
                     className="flex h-12 items-center justify-center rounded-full border-none bg-[#00d1ff] text-[12px] font-bold tracking-widest text-black shadow-[0_5px_15px_rgba(0,209,255,0.3)] transition-all hover:scale-105 hover:shadow-[0_8px_25px_rgba(0,209,255,0.5)] active:scale-95"
                     style={{

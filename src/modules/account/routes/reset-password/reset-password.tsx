@@ -39,7 +39,7 @@ export const ResetPasswordPage = () => {
       });
 
       message.success('Institutional Access Key reset successfully');
-      navigate('/login');
+      navigate('/account/login');
     } catch (err: unknown) {
       const errorMessage = err instanceof Error ? err.message : 'Reset failed';
       message.error(errorMessage);

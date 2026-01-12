@@ -27,7 +27,7 @@ export const SignupPage = () => {
       message.success(
         response.message || 'Verification email dispatched. Please check your inbox.',
       );
-      navigate('/login');
+      navigate('/account/login');
     } catch (err: unknown) {
       const errorMessage = err instanceof Error ? err.message : 'Registration failed';
       message.error(errorMessage);
@@ -136,7 +136,7 @@ export const SignupPage = () => {
           <Text className="text-slate-500! dark:text-slate-400!">
             Already verified?{' '}
             <Link
-              to="/login"
+              to="/account/login"
               className="font-bold text-blue-600 hover:underline dark:text-blue-400"
             >
               Log In

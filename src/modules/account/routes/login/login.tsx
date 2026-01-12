@@ -104,7 +104,7 @@ export const LoginPage = () => {
                 {errors.password?.message}
               </span>
               <Link
-                to="/forgot-password"
+                to="/account/forgot-password"
                 className="text-[11px] font-bold tracking-widest text-slate-400 hover:text-blue-600 dark:text-slate-500 dark:hover:text-blue-400"
               >
                 FORGOT PASSWORD?
@@ -125,7 +125,7 @@ export const LoginPage = () => {
         <footer className="mt-8 text-center">
           <Text className="text-slate-500! dark:text-slate-400!">
             New Trader?{' '}
-            <Link to="/signup" className="font-bold text-blue-600 dark:text-blue-400">
+            <Link to="/account/signup" className="font-bold text-blue-600 dark:text-blue-400">
               Create Account
             </Link>
           </Text>

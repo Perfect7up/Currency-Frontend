@@ -128,7 +128,7 @@ export const ForgotPasswordPage = () => {
 
         <footer className="mt-10 border-t border-slate-100 pt-8 text-center dark:border-white/5">
           <Link
-            to="/login"
+            to="/account/login"
             className="inline-flex items-center gap-2 text-sm font-bold text-slate-500! transition-colors hover:text-blue-600! dark:text-slate-400! dark:hover:text-blue-400!"
           >
             <LeftOutlined className="text-xs" /> RETURN TO TERMINAL LOGIN

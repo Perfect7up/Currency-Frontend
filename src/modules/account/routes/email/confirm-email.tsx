@@ -80,7 +80,7 @@ export const ConfirmEmailPage = () => {
             </Text>
             <Button
               block
-              onClick={() => navigate('/signup')}
+              onClick={() => navigate('/account/signup')}
               className="mt-8 h-14 rounded-full border-slate-200 font-bold dark:border-white/10 dark:text-white"
             >
               TRY REGISTERING AGAIN

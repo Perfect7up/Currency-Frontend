@@ -1,15 +1,14 @@
-// src/components/auth/protected-route.tsx
-import { Navigate, Outlet } from 'react-router-dom';
+import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { useAuthStore } from '../../modules/account/store/auth.store';
 
 export const ProtectedRoute = () => {
   const { isAuthenticated, tokens } = useAuthStore();
+  const location = useLocation();
 
-  // Debug to see if store is updating
-  console.log('Protected Route Check:', { isAuthenticated, hasToken: !!tokens?.accessToken });
+  const isLogged = isAuthenticated || !!tokens?.accessToken;
 
-  if (!isAuthenticated && !tokens?.accessToken) {
-    return <Navigate to="/login" replace />;
+  if (!isLogged) {
+    return <Navigate to="/account/login" state={{ from: location }} replace />;
   }
 
   return <Outlet />;
