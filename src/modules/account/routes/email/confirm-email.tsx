@@ -11,7 +11,6 @@ export const ConfirmEmailPage = () => {
   const [searchParams] = useSearchParams();
   const confirmMutation = useConfirmEmail();
 
-  // Use a ref to prevent double-execution in React Strict Mode
   const hasExecuted = useRef(false);
 
   const email = searchParams.get('email') || '';
@@ -24,15 +23,13 @@ export const ConfirmEmailPage = () => {
     }
   }, [email, token, confirmMutation]);
 
-  // Derived states for better performance
   const isLoading = confirmMutation.isPending && !!email && !!token;
-  // Show error if mutation fails OR if params are missing
   const isError = confirmMutation.isError || !email || !token;
   const isSuccess = confirmMutation.isSuccess;
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-slate-50 px-4 dark:bg-[#000513]">
-      <div className="pointer-events-none absolute h-[500px] w-[500px] rounded-full bg-blue-500/10 blur-[120px]" />
+      <div className="pointer-events-none absolute h-125 w-125 rounded-full bg-blue-500/10 blur-[120px]" />
 
       <section className="relative z-10 w-full max-w-md rounded-[2.5rem] border border-slate-200/50 bg-white p-12 text-center shadow-2xl dark:border-white/10 dark:bg-[#000513]/80">
         {isLoading && (

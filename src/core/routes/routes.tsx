@@ -20,6 +20,7 @@ import Dashboard from '../../modules/dashboard/dashboard';
 import { ForgotPasswordPage } from '../../modules/account/routes/forgot-password/forgot-password';
 import { ConfirmEmailPage } from '../../modules/account/routes/email/confirm-email';
 import { ResetPasswordPage } from '../../modules/account/routes/reset-password/reset-password';
+import { ChangePasswordPage } from '../../modules/account/routes/change-password/change-password';
 
 const LoadingFallback = () => (
   <div className="flex h-screen items-center justify-center bg-white dark:bg-[#000513]">
@@ -32,7 +33,6 @@ const AppRouter = () => {
     <Router>
       <Suspense fallback={<LoadingFallback />}>
         <Routes>
-          {/* 1. PUBLIC ROUTES (MainLayout with Navbar/Footer) */}
           <Route element={<MainLayout />}>
             <Route path="/" element={<Home />} />
             <Route path="/coins" element={<Coins />} />
@@ -42,19 +42,15 @@ const AppRouter = () => {
             <Route path="/about" element={<About />} />
             <Route path="/faq" element={<FAQ />} />
           </Route>
-
-          {/* 2. AUTH ROUTES (No Public Navbar/Footer) */}
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/reset-password" element={<ResetPasswordPage />} />
           <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-          <Route path="/confrim-email" element={<ConfirmEmailPage />} />
-
-          {/* 3. PROTECTED DASHBOARD ROUTES (DashboardLayout) */}
+          <Route path="/confirm-email" element={<ConfirmEmailPage />} />
+          <Route path="/dashboard/change-password" element={<ChangePasswordPage />} />
           <Route element={<ProtectedRoute />}>
             <Route element={<DashboardLayout />}>
               <Route path="/dashboard" element={<Dashboard />} />
-              {/* Add more private routes here as you build them */}
             </Route>
           </Route>
         </Routes>

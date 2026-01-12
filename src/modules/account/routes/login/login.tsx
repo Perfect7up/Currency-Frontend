@@ -1,12 +1,7 @@
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Input, Button, Typography, message, Modal } from 'antd';
-import {
-  MailOutlined,
-  LockOutlined,
-  ArrowRightOutlined,
-  InfoCircleOutlined,
-} from '@ant-design/icons';
+import { MailOutlined, LockOutlined, ArrowRightOutlined } from '@ant-design/icons';
 import { Link, useNavigate } from 'react-router-dom';
 import { useLogin } from '../../hooks/use-auth';
 import { useAuthStore } from '../../store/auth.store';
@@ -31,28 +26,17 @@ export const LoginPage = () => {
   const onSubmit = async (values: LoginFormValues) => {
     try {
       const data = await loginMutation.mutateAsync(values);
-
       setTokens(data.tokens);
       setUser(data.user);
       message.success('Institutional Terminal Access Granted');
       navigate('/dashboard');
     } catch (err: unknown) {
       const errorMessage = err instanceof Error ? err.message : 'Login failed';
-
-      // CHECK IF EMAIL IS UNCONFIRMED
-      // This matches the string thrown by your C# AuthService.cs
       if (errorMessage.toLowerCase().includes('verify your email')) {
         Modal.warning({
           title: 'Verification Required',
-          icon: <InfoCircleOutlined className="text-amber-500" />,
-          content:
-            'Your account is active but your email has not been verified. Please check your inbox for the activation link.',
-          okText: 'Understood',
-          okButtonProps: {
-            className: 'bg-amber-500 hover:bg-amber-600! border-none rounded-full font-bold',
-          },
+          content: 'Please check your email to activate access.',
           centered: true,
-          maskClosable: true,
         });
       } else {
         message.error(errorMessage);
@@ -61,21 +45,22 @@ export const LoginPage = () => {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-slate-50 px-4 transition-colors dark:bg-[#000513]">
-      <div className="pointer-events-none absolute h-[500px] w-[500px] rounded-full bg-blue-500/10 blur-[120px] dark:bg-indigo-500/15" />
+    <div className="flex min-h-screen items-center justify-center bg-slate-50 px-4 transition-colors duration-500 dark:bg-[#020617]">
+      <div className="pointer-events-none absolute h-125 w-125 rounded-full bg-blue-500/10 blur-[120px] dark:bg-blue-600/10" />
 
-      <section className="relative z-10 w-full max-w-md rounded-[2.5rem] border border-slate-200/50 bg-white p-8 shadow-2xl backdrop-blur-xl md:p-10 dark:border-white/10 dark:bg-[#000513]/80">
+      <section className="relative z-10 w-full max-w-md rounded-[2.5rem] border border-slate-200/60 bg-white p-8 shadow-2xl backdrop-blur-xl md:p-10 dark:border-white/10 dark:bg-[#0a0f1d]/90">
         <header className="mb-8 text-center">
-          <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-600/10 dark:bg-indigo-400/10">
-            <LockOutlined className="text-2xl text-blue-600 dark:text-indigo-400" />
+          <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-600/10 dark:bg-blue-500/20">
+            <LockOutlined className="text-2xl text-blue-600 dark:text-blue-400" />
           </div>
+
           <Title
             level={2}
-            className="m-0! bg-linear-to-r from-slate-900 via-blue-900 to-slate-900 bg-clip-text font-black! tracking-tighter text-transparent! dark:from-white! dark:via-indigo-300! dark:to-white!"
+            className="m-0! bg-linear-to-r from-slate-900 to-slate-700 bg-clip-text font-black! tracking-tighter text-transparent dark:from-white dark:to-slate-400 dark:text-white!"
           >
             Trader Login
           </Title>
-          <Text className="text-slate-500 dark:text-slate-400">Initialize terminal session</Text>
+          <Text className="text-slate-500! dark:text-slate-400!">Initialize terminal session</Text>
         </header>
 
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
@@ -87,17 +72,16 @@ export const LoginPage = () => {
                 <Input
                   {...field}
                   size="large"
-                  prefix={<MailOutlined className="mr-2 text-slate-400" />}
+                  prefix={<MailOutlined className="mr-2 text-slate-400 dark:text-slate-300" />}
                   placeholder="Email Address"
-                  status={errors.email ? 'error' : ''}
-                  className="rounded-2xl! border-slate-200! bg-slate-50! hover:border-blue-500! dark:border-white/10! dark:bg-white/5! dark:text-white!"
+                  className="h-12! rounded-2xl! border-slate-200! bg-slate-50! text-slate-900! placeholder:text-slate-400! dark:border-white/10! dark:bg-white/5! dark:text-white! dark:placeholder:text-white/40! [&_svg]:dark:text-slate-300"
                 />
               )}
             />
             {errors.email && (
-              <Text className="mt-1 ml-2 text-[10px] font-bold text-red-500 uppercase">
+              <p className="mt-1 ml-2 text-[10px] font-bold text-red-500 uppercase">
                 {errors.email.message}
-              </Text>
+              </p>
             )}
           </section>
 
@@ -109,26 +93,21 @@ export const LoginPage = () => {
                 <Input.Password
                   {...field}
                   size="large"
-                  prefix={<LockOutlined className="mr-2 text-slate-400" />}
+                  prefix={<LockOutlined className="mr-2 text-slate-400 dark:text-slate-300" />}
                   placeholder="Password"
-                  status={errors.password ? 'error' : ''}
-                  className="rounded-2xl! border-slate-200! bg-slate-50! hover:border-blue-500! dark:border-white/10! dark:bg-white/5! dark:text-white!"
+                  className="h-12! rounded-2xl! border-slate-200! bg-slate-50! text-slate-900! placeholder:text-slate-400! dark:border-white/10! dark:bg-white/5! dark:text-white! dark:placeholder:text-white/40! [&_svg]:dark:text-slate-300"
                 />
               )}
             />
             <div className="mt-2 flex items-center justify-between px-1">
-              {errors.password ? (
-                <Text className="text-[10px] font-bold text-red-500 uppercase">
-                  {errors.password.message}
-                </Text>
-              ) : (
-                <div />
-              )}
+              <span className="text-[10px] font-bold text-red-500 uppercase">
+                {errors.password?.message}
+              </span>
               <Link
                 to="/forgot-password"
-                className="text-[11px] font-bold tracking-widest text-slate-400 uppercase transition-colors hover:text-blue-600 dark:hover:text-indigo-400"
+                className="text-[11px] font-bold tracking-widest text-slate-400 hover:text-blue-600 dark:text-slate-500 dark:hover:text-blue-400"
               >
-                Forgot Password?
+                FORGOT PASSWORD?
               </Link>
             </div>
           </section>
@@ -137,16 +116,16 @@ export const LoginPage = () => {
             type="primary"
             htmlType="submit"
             loading={loginMutation.isPending}
-            className="mt-4 h-14 rounded-full border-none bg-[#00d1ff] font-bold tracking-widest text-black shadow-[0_5px_15px_rgba(0,209,255,0.3)] transition-all hover:scale-[1.02]! active:scale-95"
+            className="mt-4 h-14 rounded-xl! border-none! bg-blue-600! font-bold! tracking-widest text-white! shadow-xl shadow-blue-500/20 transition-all hover:bg-blue-500! active:scale-95"
           >
             SIGN IN <ArrowRightOutlined className="ml-2" />
           </Button>
         </form>
 
         <footer className="mt-8 text-center">
-          <Text className="text-slate-500 dark:text-slate-400">
+          <Text className="text-slate-500! dark:text-slate-400!">
             New Trader?{' '}
-            <Link to="/signup" className="font-bold text-blue-600 dark:text-indigo-400">
+            <Link to="/signup" className="font-bold text-blue-600 dark:text-blue-400">
               Create Account
             </Link>
           </Text>

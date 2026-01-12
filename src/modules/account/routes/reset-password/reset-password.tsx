@@ -13,7 +13,6 @@ export const ResetPasswordPage = () => {
   const [searchParams] = useSearchParams();
   const resetMutation = useResetPassword();
 
-  // Extract data from the URL link sent to Gmail
   const token = searchParams.get('token') || '';
   const email = searchParams.get('email') || '';
 
@@ -33,7 +32,6 @@ export const ResetPasswordPage = () => {
     }
 
     try {
-      // payload matches components['schemas']['ResetPasswordRequest']
       await resetMutation.mutateAsync({
         email,
         token,
@@ -49,29 +47,28 @@ export const ResetPasswordPage = () => {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-slate-50 px-4 transition-colors dark:bg-[#000513]">
-      <div className="pointer-events-none absolute h-[500px] w-[500px] rounded-full bg-blue-500/10 blur-[120px] dark:bg-indigo-500/15" />
+    <div className="flex min-h-screen items-center justify-center bg-slate-50 px-4 transition-colors duration-500 dark:bg-[#020617]">
+      <div className="pointer-events-none absolute h-125 w-125 rounded-full bg-blue-500/10 blur-[120px] dark:bg-blue-600/10" />
 
-      <section className="relative z-10 w-full max-w-md rounded-[2.5rem] border border-slate-200/50 bg-white p-8 shadow-2xl backdrop-blur-xl md:p-10 dark:border-white/10 dark:bg-[#000513]/80">
+      <section className="relative z-10 w-full max-w-md rounded-[2.5rem] border border-slate-200/60 bg-white p-8 shadow-2xl backdrop-blur-xl md:p-10 dark:border-white/10 dark:bg-[#0a0f1d]/90">
         <header className="mb-8 text-center">
-          <section className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-indigo-500/10">
-            <SafetyCertificateOutlined className="text-2xl text-indigo-500" />
-          </section>
+          <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-600/10 dark:bg-blue-500/20">
+            <SafetyCertificateOutlined className="text-2xl text-blue-600 dark:text-blue-400" />
+          </div>
           <Title
             level={2}
-            className="m-0! bg-linear-to-r from-slate-900 via-indigo-900 to-slate-900 bg-clip-text font-black! tracking-tighter text-transparent! dark:from-white! dark:via-indigo-300! dark:to-white!"
+            className="m-0! bg-linear-to-r from-slate-900 to-slate-700 bg-clip-text font-black! tracking-tighter text-transparent dark:from-white dark:to-slate-400 dark:text-white!"
           >
             Reset Credentials
           </Title>
-          <Text className="mt-2 block leading-tight text-slate-500 dark:text-slate-400">
-            Account recovery for <b className="text-slate-900 dark:text-white">{email}</b>
+          <Text className="mt-2 block leading-tight text-slate-500! dark:text-slate-400!">
+            Account recovery for <b className="text-slate-900! dark:text-white!">{email}</b>
           </Text>
         </header>
 
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6">
-          {/* New Password */}
           <section>
-            <Text className="mb-2 block text-[10px] font-bold tracking-[0.2em] text-slate-400 uppercase">
+            <Text className="mb-2 block text-[10px] font-bold tracking-[0.2em] text-slate-400! uppercase dark:text-slate-500!">
               New Security Key
             </Text>
             <Controller
@@ -81,23 +78,22 @@ export const ResetPasswordPage = () => {
                 <Input.Password
                   {...field}
                   size="large"
-                  prefix={<LockOutlined className="mr-2 text-slate-400" />}
+                  prefix={<LockOutlined className="mr-2 text-slate-400 dark:text-slate-300" />}
                   placeholder="Minimum 8 characters"
                   status={errors.password ? 'error' : ''}
-                  className="rounded-2xl! border-slate-200! bg-slate-50! hover:border-blue-500! dark:border-white/10! dark:bg-white/5! dark:text-white!"
+                  className="h-12! rounded-2xl! border-slate-200! bg-slate-50! text-slate-900! placeholder:text-slate-400! hover:border-blue-500! dark:border-white/10! dark:bg-white/5! dark:text-white! dark:placeholder:text-white/40! [&_svg]:dark:text-slate-300"
                 />
               )}
             />
             {errors.password && (
-              <Text className="mt-1 ml-2 text-[10px] font-bold text-red-500 uppercase">
+              <p className="mt-1 ml-2 text-[10px] font-bold text-red-500 uppercase">
                 {errors.password.message}
-              </Text>
+              </p>
             )}
           </section>
 
-          {/* Confirm Password */}
           <section>
-            <Text className="mb-2 block text-[10px] font-bold tracking-[0.2em] text-slate-400 uppercase">
+            <Text className="mb-2 block text-[10px] font-bold tracking-[0.2em] text-slate-400! uppercase dark:text-slate-500!">
               Confirm Security Key
             </Text>
             <Controller
@@ -107,17 +103,19 @@ export const ResetPasswordPage = () => {
                 <Input.Password
                   {...field}
                   size="large"
-                  prefix={<CheckCircleOutlined className="mr-2 text-slate-400" />}
+                  prefix={
+                    <CheckCircleOutlined className="mr-2 text-slate-400 dark:text-slate-300" />
+                  }
                   placeholder="Re-enter new key"
                   status={errors.confirmPassword ? 'error' : ''}
-                  className="rounded-2xl! border-slate-200! bg-slate-50! hover:border-blue-500! dark:border-white/10! dark:bg-white/5! dark:text-white!"
+                  className="h-12! rounded-2xl! border-slate-200! bg-slate-50! text-slate-900! placeholder:text-slate-400! hover:border-blue-500! dark:border-white/10! dark:bg-white/5! dark:text-white! dark:placeholder:text-white/40! [&_svg]:dark:text-slate-300"
                 />
               )}
             />
             {errors.confirmPassword && (
-              <Text className="mt-1 ml-2 text-[10px] font-bold text-red-500 uppercase">
+              <p className="mt-1 ml-2 text-[10px] font-bold text-red-500 uppercase">
                 {errors.confirmPassword.message}
-              </Text>
+              </p>
             )}
           </section>
 
@@ -125,7 +123,7 @@ export const ResetPasswordPage = () => {
             type="primary"
             htmlType="submit"
             loading={resetMutation.isPending}
-            className="mt-2 flex h-14 items-center justify-center rounded-full border-none bg-[#00d1ff] text-[14px] font-bold tracking-widest text-black shadow-[0_5px_15px_rgba(0,209,255,0.3)] transition-all hover:scale-[1.02]! active:scale-95"
+            className="mt-2 h-14 rounded-xl! border-none! bg-blue-600! text-[14px] font-bold! tracking-widest text-white! shadow-xl shadow-blue-500/20 transition-all hover:bg-blue-500! active:scale-95"
           >
             UPDATE TERMINAL ACCESS
           </Button>

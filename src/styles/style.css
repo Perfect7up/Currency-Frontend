@@ -26,7 +26,6 @@ body {
   color: inherit !important;
 }
 
-/* Optional: Ensure the hover state in dark mode looks good */
 .dark .ant-select-item-option-active {
   background-color: rgba(255, 255, 255, 0.1) !important;
   color: white !important;
@@ -36,15 +35,14 @@ body {
   color: rgba(255, 255, 255, 0.8);
 }
 
-/* Fix for Ant Design Dropdown in Dark Mode */
 .dark .dark-mode-dropdown {
-  background-color: #1a1f2e !important; /* Match your dark theme background */
+  background-color: #1a1f2e !important;
   border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
 }
 
 .dark .dark-mode-dropdown .ant-select-item {
-  color: rgba(255, 255, 255, 0.8) !important; /* Light text */
+  color: rgba(255, 255, 255, 0.8) !important;
 }
 
 .dark .dark-mode-dropdown .ant-select-item-option-selected {
@@ -57,21 +55,18 @@ body {
   color: #fff !important;
 }
 
-/* Light Mode Defaults (Optional - ensures it stays clean) */
 .dark-mode-dropdown .ant-select-item {
   border-radius: 8px;
   margin-bottom: 2px;
 }
 
-/* Light Mode (Default) */
 .custom-dropdown {
   background-color: #ffffff !important;
 }
 .custom-dropdown .ant-select-item {
-  color: #1e293b !important; /* slate-800 */
+  color: #1e293b !important;
 }
 
-/* Dark Mode (Only when .dark class is on html) */
 html.dark .custom-dropdown {
   background-color: #0b1220 !important;
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
@@ -88,4 +83,19 @@ html.dark .custom-dropdown .ant-select-item-option-selected {
 
 html.dark .custom-dropdown .ant-select-item-option-active {
   background-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+.dark .ant-input::placeholder,
+.dark .ant-input-affix-wrapper input::placeholder {
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.dark .ant-input-prefix,
+.dark .ant-input-suffix,
+.dark .ant-input-password-icon {
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+
+.dark .ant-input-password-icon:hover {
+  color: #ffffff !important;
 }
