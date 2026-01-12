@@ -17,8 +17,8 @@ export const CurrencyConverter = () => {
     value: asset.value,
     label: (
       <section className="flex items-center justify-between gap-2">
-        <span className="font-medium text-slate-900 dark:text-slate-100">{asset.label}</span>
-        <Text className="text-[10px]! uppercase opacity-40 dark:text-white!">{asset.symbol}</Text>
+        <span className="font-medium text-inherit">{asset.label}</span>
+        <Text className="text-[10px]! uppercase opacity-50 dark:text-white!">{asset.symbol}</Text>
       </section>
     ),
   }));
@@ -56,46 +56,52 @@ export const CurrencyConverter = () => {
 
           <section className="rounded-2xl border border-slate-100 bg-slate-50/50 px-4 py-2 dark:border-white/5 dark:bg-white/5">
             <Text className="text-xs! font-bold text-slate-500! dark:text-slate-400">
-              Uptime: <span className="text-emerald-500">99.9% Live</span>
+              Uptime: <span className="text-emerald-500">100% Live</span>
             </Text>
           </section>
         </header>
 
         <section className="grid grid-cols-1 items-center gap-6 lg:grid-cols-[1fr_auto_1fr]">
+          {/* INPUT SECTION */}
           <section className="flex flex-col gap-3">
-            <Text className="ml-1 text-[11px]! font-bold! tracking-widest text-slate-400! uppercase">
+            <Text className="ml-1 text-[11px]! font-bold! tracking-widest text-slate-500 uppercase dark:text-slate-400!">
               Input Amount
             </Text>
-            <section className="rounded-3xl border border-slate-200 bg-slate-50/50 p-6 transition-all focus-within:border-blue-500 focus-within:bg-white dark:border-white/10 dark:bg-white/5 dark:focus-within:border-indigo-500 dark:focus-within:bg-white/10">
+
+            <section className="rounded-3xl border border-slate-200 bg-white p-6 transition-all focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-blue-500/20 dark:border-white/10 dark:bg-white/5 dark:focus-within:border-indigo-500 dark:focus-within:ring-indigo-500/20">
               <InputNumber
                 variant="borderless"
                 size="large"
                 value={amount}
                 onChange={(val) => setAmount(val || 0)}
-                className="w-full! text-3xl! font-black! text-slate-900! dark:text-white!"
+                className="w-full! text-3xl! font-black! text-slate-900 dark:text-white!"
                 placeholder="0.00"
               />
+
               <Select
                 showSearch
                 variant="borderless"
                 size="large"
                 value={fromAsset}
                 onChange={setFromAsset}
-                className="mt-4! h-12! w-full! rounded-2xl! bg-white! font-bold! text-slate-900! shadow-sm dark:bg-[#000513]! dark:text-white!"
-                popupClassName="dark:bg-slate-900 dark:text-white"
+                className="mt-4! h-12! w-full! rounded-2xl! bg-slate-100 font-bold! text-slate-900 shadow-sm transition-colors hover:bg-slate-200 dark:bg-white/10 dark:text-white! dark:hover:bg-white/20"
+                popupClassName="custom-dropdown"
+                getPopupContainer={(trigger) => trigger.parentNode}
                 options={assetOptions}
               />
             </section>
           </section>
 
+          {/* SWAP ICON */}
           <section className="flex justify-center lg:pt-8">
             <section className="flex h-14 w-14 items-center justify-center rounded-full bg-slate-900 text-white shadow-2xl transition-transform hover:rotate-180 dark:bg-white dark:text-slate-900">
               <SwapOutlined className="text-2xl" />
             </section>
           </section>
 
+          {/* RESULT SECTION */}
           <section className="relative flex flex-col gap-3">
-            <Text className="ml-1 text-[11px]! font-bold! tracking-widest text-slate-400! uppercase">
+            <Text className="ml-1 text-[11px]! font-bold! tracking-widest text-slate-500 uppercase dark:text-slate-400!">
               Estimated Result
             </Text>
             <section className="rounded-3xl border border-blue-100 bg-blue-50/30 p-6 dark:border-indigo-500/20 dark:bg-indigo-500/5">
@@ -116,8 +122,10 @@ export const CurrencyConverter = () => {
                 size="large"
                 value={toCurrency}
                 onChange={setToCurrency}
-                className="mt-4! h-12! w-full! rounded-2xl! bg-white/80! font-bold! text-slate-900! shadow-sm dark:bg-[#000513]! dark:text-white!"
-                popupClassName="dark:bg-slate-900 dark:text-white"
+                /* Updated classes to match the theme perfectly */
+                className="mt-4! h-12! w-full! rounded-2xl! bg-white font-bold! text-slate-900 shadow-sm transition-colors hover:bg-slate-50 dark:bg-[#000513] dark:text-white! dark:hover:bg-black/40"
+                popupClassName="custom-dropdown"
+                getPopupContainer={(trigger) => trigger.parentNode}
                 options={currencyOptions}
               />
             </section>

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Button, Typography, ConfigProvider, theme, Flex, Dropdown, Image } from 'antd';
 import { MenuOutlined, DesktopOutlined, MoonOutlined, SunOutlined } from '@ant-design/icons';
-import { useLocation, Link as RouterLink } from 'react-router-dom';
+import { useLocation, Link as RouterLink, Link } from 'react-router-dom';
 
 import DesktopNavbar from './desktop-navbar';
 import MobileNavbar from './mobile-navbar';
@@ -103,15 +103,17 @@ const Navbar = () => {
                 />
               </Dropdown>
               <div className="hidden md:block">
-                <Button
-                  className="flex h-12 items-center justify-center rounded-full border-none bg-[#00d1ff] text-[12px] font-bold tracking-widest text-black shadow-[0_5px_15px_rgba(0,209,255,0.3)] transition-all hover:scale-105 hover:shadow-[0_8px_25px_rgba(0,209,255,0.5)] active:scale-95"
-                  style={{
-                    padding: '0 32px',
-                    lineHeight: '48px',
-                  }}
-                >
-                  START TRADING
-                </Button>
+                <Link to="/login">
+                  <Button
+                    className="flex h-12 items-center justify-center rounded-full border-none bg-[#00d1ff] text-[12px] font-bold tracking-widest text-black shadow-[0_5px_15px_rgba(0,209,255,0.3)] transition-all hover:scale-105 hover:shadow-[0_8px_25px_rgba(0,209,255,0.5)] active:scale-95"
+                    style={{
+                      padding: '0 32px',
+                      lineHeight: '48px',
+                    }}
+                  >
+                    START TRADING
+                  </Button>
+                </Link>
               </div>
 
               <div className="block lg:hidden">
