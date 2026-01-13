@@ -1,4 +1,3 @@
-// src/layouts/DashboardLayout.tsx
 import { useState, useEffect } from 'react';
 import { Layout, ConfigProvider, theme } from 'antd';
 import { Outlet } from 'react-router-dom';
@@ -41,30 +40,33 @@ const DashboardLayout = () => {
       theme={{
         algorithm: isDark ? theme.darkAlgorithm : theme.defaultAlgorithm,
         token: {
-          colorPrimary: '#00d1ff',
+          colorPrimary: '#3b82f6',
           borderRadius: 12,
+          colorBgContainer: isDark ? '#020817' : '#ffffff',
+          colorTextBase: isDark ? '#ffffff' : '#0f172a',
         },
-        // ADD THIS SECTION: Explicitly fix Menu colors for Dark Mode
         components: {
           Menu: {
             itemBg: 'transparent',
-            itemColor: isDark ? 'rgba(255, 255, 255, 0.65)' : 'rgba(0, 0, 0, 0.85)',
-            itemHoverColor: isDark ? '#ffffff' : '#00d1ff',
-            itemSelectedColor: '#00d1ff',
-            itemSelectedBg: 'rgba(0, 209, 255, 0.1)',
-            itemActiveBg: 'rgba(255, 255, 255, 0.05)',
+            itemColor: isDark ? '#94a3b8' : '#64748b',
+            itemSelectedColor: '#3b82f6',
+            itemHoverBg: isDark ? 'rgba(255, 255, 255, 0.05)' : '#f1f5f9',
+            itemActiveBg: 'transparent',
+          },
+          Layout: {
+            siderBg: isDark ? '#020817' : '#ffffff',
+            headerBg: isDark ? '#020817' : '#ffffff',
           },
         },
       }}
     >
-      <Layout className="min-h-screen bg-[#f8fafc] dark:bg-[#020817]">
-        {/* Pass isDark to Sidebar if needed, but removing theme="light" is the key */}
-        <Sidebar collapsed={collapsed} setCollapsed={setCollapsed} isDark={isDark} />
+      <Layout hasSider className="min-h-screen bg-slate-50 dark:bg-[#020817]">
+        <Sidebar collapsed={collapsed} setCollapsed={setCollapsed} />
 
-        <Layout className="bg-transparent transition-all duration-300 ease-in-out">
+        <Layout className="bg-transparent">
           <DashboardNavbar themeMode={themeMode} setThemeMode={setThemeMode} isDark={isDark} />
-          <Content className="p-6 lg:p-10">
-            <div className="mx-auto max-w-7xl">
+          <Content className="p-4 md:p-6 lg:p-10">
+            <div className="mx-auto max-w-7xl pb-20 md:pb-0">
               <Outlet />
             </div>
           </Content>

@@ -9,6 +9,7 @@ import {
   LogoutOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined,
+  LoadingOutlined,
 } from '@ant-design/icons';
 import { useLogout } from '../../../account/hooks/use-auth';
 import { useAuthStore } from '../../../account/store/auth.store';
@@ -22,7 +23,6 @@ export const Sidebar = ({
 }: {
   collapsed: boolean;
   setCollapsed: (v: boolean) => void;
-  isDark: boolean;
 }) => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -43,27 +43,27 @@ export const Sidebar = ({
   const menuItems = [
     {
       key: '/dashboard',
-      icon: <DashboardOutlined className="text-lg" />,
+      icon: <DashboardOutlined />,
       label: <Link to="/dashboard">Overview</Link>,
     },
     {
       key: '/dashboard/portfolio',
-      icon: <WalletOutlined className="text-lg" />,
+      icon: <WalletOutlined />,
       label: <Link to="/dashboard/portfolio">Portfolio</Link>,
     },
     {
       key: '/dashboard/trade',
-      icon: <SwapOutlined className="text-lg" />,
+      icon: <SwapOutlined />,
       label: <Link to="/dashboard/trade">Trade</Link>,
     },
     {
       key: '/dashboard/history',
-      icon: <HistoryOutlined className="text-lg" />,
+      icon: <HistoryOutlined />,
       label: <Link to="/dashboard/history">Activity</Link>,
     },
     {
       key: '/dashboard/settings',
-      icon: <SettingOutlined className="text-lg" />,
+      icon: <SettingOutlined />,
       label: <Link to="/dashboard/settings">Settings</Link>,
     },
   ];
@@ -76,11 +76,11 @@ export const Sidebar = ({
         trigger={null}
         width={260}
         collapsedWidth={80}
-        className="sticky top-0 bottom-0 left-0 hidden h-screen border-r border-slate-200 bg-white transition-all duration-300 ease-in-out md:flex dark:border-white/10 dark:bg-[#020817]!"
+        className="hidden border-r border-slate-200 bg-white md:block dark:border-white/10 dark:bg-[#020817]!"
       >
         <div className="flex h-full flex-col">
           <div
-            className={`flex h-20 items-center justify-between px-6 ${collapsed ? 'justify-center px-0' : ''}`}
+            className={`flex h-20 items-center px-6 ${collapsed ? 'justify-center px-0' : 'justify-between'}`}
           >
             {!collapsed && (
               <Text className="text-xl font-black tracking-tighter text-slate-900 dark:text-white">
@@ -91,16 +91,16 @@ export const Sidebar = ({
               type="text"
               icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
               onClick={() => setCollapsed(!collapsed)}
-              className="flex h-10 w-10 items-center justify-center text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-white/5"
+              className="flex h-9 w-9 items-center justify-center text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-white/5"
             />
           </div>
 
-          <div className="flex-1 overflow-x-hidden overflow-y-auto py-4">
+          <div className="flex-1 overflow-x-hidden overflow-y-auto py-2">
             <Menu
               mode="inline"
               selectedKeys={[location.pathname]}
               items={menuItems}
-              className="border-none bg-transparent px-3 [&_.ant-menu-item]:rounded-xl [&_.ant-menu-item_a]:text-inherit!"
+              className="border-none bg-transparent px-3 [&_.ant-menu-item-selected]:bg-blue-50! [&_.ant-menu-item-selected]:text-blue-600! dark:[&_.ant-menu-item-selected]:bg-blue-500/10! dark:[&_.ant-menu-item-selected]:text-blue-400!"
             />
           </div>
 
@@ -123,7 +123,8 @@ export const Sidebar = ({
           </div>
         </div>
       </Sider>
-      <nav className="fixed right-0 bottom-0 left-0 z-50 flex h-16 items-center justify-around border-t border-slate-200 bg-white/90 px-2 backdrop-blur-lg md:hidden dark:border-white/10 dark:bg-[#020817]/90">
+
+      <nav className="fixed right-0 bottom-0 left-0 z-50 flex h-16 items-center justify-around border-t border-slate-200 bg-white/95 px-1 backdrop-blur-lg md:hidden dark:border-white/10 dark:bg-[#020817]/90">
         {menuItems.map((item) => {
           const isActive = location.pathname === item.key;
           return (
@@ -131,9 +132,7 @@ export const Sidebar = ({
               key={item.key}
               to={item.key}
               className={`flex flex-1 flex-col items-center justify-center py-2 transition-all ${
-                isActive
-                  ? 'text-blue-500'
-                  : 'text-slate-400 hover:text-slate-600 dark:text-slate-500 dark:hover:text-slate-300'
+                isActive ? 'text-blue-500' : 'text-slate-400 dark:text-slate-500'
               }`}
             >
               <span className={`text-xl ${isActive ? 'scale-110' : ''}`}>{item.icon}</span>
@@ -144,11 +143,18 @@ export const Sidebar = ({
 
         <button
           onClick={handleLogout}
-          className="flex flex-1 flex-col items-center justify-center py-2 text-slate-400 dark:text-slate-500"
+          disabled={logoutMutation.isPending}
+          className="flex flex-1 flex-col items-center justify-center py-2 text-red-500 transition-all active:scale-95 dark:text-red-400"
         >
-          <LogoutOutlined className="text-xl" />
+          {logoutMutation.isPending ? (
+            <LoadingOutlined className="text-xl" />
+          ) : (
+            <LogoutOutlined className="text-xl" />
+          )}
+          <span className="mt-1 h-1 w-1 opacity-0" />
         </button>
       </nav>
+
       <div className="h-16 md:hidden" />
     </>
   );
